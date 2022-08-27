@@ -4,10 +4,7 @@
       <strong>My task is: {{ task }}</strong><br>
       <input 
         type='text'
-
-        v-bind:value="task"
-        v-on:input="task=$event.target.value"
-
+        v-model='task'
         class='taskInput' />
         <button v-on:click='addTask'> Add Task </button>
     </div>
@@ -18,9 +15,7 @@
 export default{
 name : 'TaskInput',
 data: () => ({
-
-    task: 'wpis',
-
+    task: 'wpisz...',
   }),
 methods: {
     addTask(){
