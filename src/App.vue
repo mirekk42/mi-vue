@@ -5,7 +5,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="80" height="100" />
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
@@ -60,23 +60,24 @@ nav a:first-of-type {
   header {
     display: flex;
     place-items: center;
+    flex-direction: column;
     padding-right: calc(var(--section-gap) / 2);
   }
 
   .logo {
-    margin: 0 2rem 0 0;
+    margin: 0 2rem 0 2rem;
   }
 
   header .wrapper {
     display: flex;
-    place-items: flex-start;
+    flex-direction: column;
     flex-wrap: wrap;
   }
 
   nav {
-    text-align: left;
+    text-align: center;
     margin-left: -1rem;
-    font-size: 1rem;
+    font-size: 2rem;
 
     padding: 1rem 0;
     margin-top: 1rem;
