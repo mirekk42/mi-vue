@@ -1,29 +1,29 @@
 <template>
 <div>
+<div>
   <div class='cardBox'>
     <div class='container'>
       <h2>Today is:</h2>
       <h3>{{ getCurrentDate }}</h3>
     </div>
   </div>
-
-   <div class='cardBox'>
-    <div class='container tasker'>
-      <strong>My task is: {{ task }}</strong><br>
-      <input 
-        type='text'
-        v-model='task'
-        class='taskInput' />
-    </div>
   </div>
-  </div>
-
+  <task-input @add-task="addNewTask"></task-input>
+</div>
 </template>
 
 <script>
+import TaskInput from '../components/MyTask.vue'
+
+
 export default {
   name: 'CurrentTime',
-  
+  components: {TaskInput},
+   methods:{
+    addNewTask(task){
+      alert(`New task added: ${task}`);
+    },
+  },
   computed: {
     getCurrentDate() {
       const browserLocale =
@@ -43,9 +43,6 @@ export default {
       return intlDateTime.format(new Date());
     }
   },
-  data: () => ({
-    task: 'wpisz swoj task ',
-  }),
 };
 </script>
 
@@ -55,19 +52,5 @@ max-width: 100%;
 max-height: 25%;
 text-align: center;
 }
-.tasker{
-    margin: 20px;
-    font-size: xx-large;
-  }
-  .tasker .taskInput {
-    font-size: 14px;
-    margin: 0 10px;
-    border: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.75);
-  }
-  .tasker button {
-    border: 1px solid rgba(0, 0, 0, 0.75);
-    border-radius: 3px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  }
+
 </style>
