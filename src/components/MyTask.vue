@@ -28,7 +28,6 @@ methods: {
 
 <style>
 .cardBox{
-max-width: 100%;
 max-height: 25%;
 text-align: center;
 }
