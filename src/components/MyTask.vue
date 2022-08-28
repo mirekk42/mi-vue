@@ -5,24 +5,42 @@
       <input 
         type='text'
         v-model='task'
-        class='taskInput' />
+        class='taskInput' 
+        :class="v$.task.$error ? 'fieldError' : ''" />
+        <div v-if="this.v$.task.$error">Name field has an error.</div>
         <button v-on:click='addTask'> Add Task </button>
     </div>
    </div>
 </template>
 
 <script>
+import useVuelidate from '@vuelidate/core'
+import { required,minLength } from '@vuelidate/validators'
+
+
 export default{
+setup () {
+    return { v$: useVuelidate() }
+  },
 name : 'TaskInput',
 data: () => ({
     task: 'wpisz...',
   }),
 methods: {
     addTask(){
+      this.v$.$touch();
+      if(this.v$.task.$error) return false
       this.$emit('add-task', this.task);
       this.task = '';
+      this.v$.task.$reset();
+      return true
     },
   },
+   validations () {
+    return {
+      task: {required,minLength: minLength(5) } 
+      }
+    }
 }
 </script>
 
@@ -46,5 +64,10 @@ text-align: center;
     border-radius: 3px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   }
+  .fieldError {
+  border: 2px solid red !important;
+  color: red;
+  border-radius: 3px;
+}
 
 </style>
