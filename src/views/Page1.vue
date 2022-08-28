@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import TaskInput from '../components/MyTask.vue'
+import TaskInput from '../components/MyTask.vue';
 import CurrentTime from '../components/CurrentTime.vue';
 
 
