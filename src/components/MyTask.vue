@@ -42,6 +42,7 @@ methods: {
       }
     }
 }
+
 </script>
 
 <style>
