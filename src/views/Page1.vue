@@ -44,6 +44,7 @@
             <li 
               v-for='(taskItem, index) in displayList'
               :key='`${index}_${Math.random()}`'
+              :class="taskItem.finishedAt ? 'taskDone' : ''"
             >
               <input type='checkbox' 
                 :checked='!!taskItem.finishedAt' 
@@ -139,9 +140,28 @@ export default {
 <style scoped>
 .taskList li{
     text-align: left;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    padding: 5px 10px;
+    list-style: none;
   }
 .center{
  margin-left: 12%;
 }
+@keyframes colorChange {
+    from{
+      background-color: inherit;
+    }
+    to{
+      background-color: rgba(0, 160, 24, 0.577); 
+    }
+  }
+  .taskList li:nth-child(even){
+    background-color: rgba(0,0,0,0.05);
+  }
+
+  .taskList li.taskDone{
+    animation: colorChange 5s ease;
+    background-color: rgba(0, 160, 24, 0.577);
+  }
 
 </style>
