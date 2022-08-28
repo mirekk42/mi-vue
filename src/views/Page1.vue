@@ -13,9 +13,9 @@
             >
               <input type='checkbox' 
                 :checked='!!taskItem.finishedAt' 
-                @input='changeStatus(index)'
+                @input='changeStatus(taskItem.id)'
               /> 
-              {{ taskItem.task }} 
+             # {{taskItem.id}} - {{ taskItem.task }} 
               <span v-if='taskItem.finishedAt'> || Done at:  {{ formatDate(taskItem.finishedAt) }} </span>
             </li>
           </ul>
@@ -39,9 +39,24 @@ export default {
     taskList: [],
   }),
   computed: {
-    displayList(){
-      return this.taskList;
+    baseList() {
+      return [...this.taskList]
+        .map((t, index) => ({
+            ...t,
+            id: index + 1
+          }));
     },
+    filteredList() {
+      return [...this.baseList]
+            .filter(t => !t.finishedAt);
+    },
+    sortedList() {
+      return [...this.filteredList]
+          .sort((a, b) => b.id - a.id);
+    },
+    displayList() {
+      return this.sortedList;
+    }
   },
   methods:{
     addNewTask(task){
@@ -53,7 +68,7 @@ export default {
       alert(`New task added: ${task}`);
     },
      changeStatus(taskIndex){
-  const task = this.taskList[taskIndex];
+  const task = this.taskList[taskIndex-1];
     if(task.finishedAt){
       task.finishedAt = undefined;
     } else {
